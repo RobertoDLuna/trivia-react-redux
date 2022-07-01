@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../component/Header';
-import { addQuestions } from '../redux/actions';
+import { addQuestions, UPDATE_SCORE } from '../redux/actions';
 import { getQuestions } from '../services/GetApi';
 import '../css/Game.css';
 
@@ -81,6 +81,23 @@ class Game extends React.Component {
         button.style = 'border: 3px solid rgb(6, 240, 15)';
       }
     });
+    this.scoreUpdate();
+  }
+
+  scoreUpdate = ({ target: { textContent } }) => {
+    const { novoArray1, correctAnswer, countdown } = this.state;
+    const { dispatch } = this.props;
+    const multiplier = {
+      hard: 3,
+      medium: 2,
+      easy: 1,
+    };
+    if (textContent === novoArray1[correctAnswer].correct_answer) {
+      dispatch(UPDATE_SCORE(
+        +'10' + (countdown * multiplier[novoArray1[correctAnswer].difficulty]),
+      ));
+    }
+    this.handleClickAnswer();
   }
 
   countdown() {
@@ -149,7 +166,7 @@ class Game extends React.Component {
                 </button>
               )
               //  Pesquisa: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-          )).sort(() => [Math.random() - '0.5'])}
+          ))/* .sort(() => [Math.random() - '0.5']) */}
         </div>
       </div>
     ));

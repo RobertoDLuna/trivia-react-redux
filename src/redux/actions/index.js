@@ -4,6 +4,7 @@ export const ADD_USERNAME = 'ADD_USERNAME';
 export const ADD_USEREMAIL = 'ADD_USEREMAIL';
 export const ADD_USERTOKEN = 'ADD_USERTOKEN';
 export const ADD_QUESTIONS = 'ADD_QUESTIONS';
+export const UPDATE_SCORE = 'UPDATE_SCORE';
 
 export const addUserName = (user) => ({
   type: ADD_USERNAME,
@@ -23,6 +24,11 @@ export const addUserToken = (token) => ({
 export const addQuestions = (question) => ({
   type: ADD_QUESTIONS,
   payload: question,
+});
+
+export const updateScore = (payload) => ({
+  type: UPDATE_SCORE,
+  score: payload,
 });
 
 export function getToken() {
