@@ -4,7 +4,14 @@ export const ADD_USERNAME = 'ADD_USERNAME';
 export const ADD_USEREMAIL = 'ADD_USEREMAIL';
 export const ADD_USERTOKEN = 'ADD_USERTOKEN';
 export const ADD_QUESTIONS = 'ADD_QUESTIONS';
+<<<<<<< HEAD
 export const UPDATE_SCORE = 'UPDATE_SCORE';
+=======
+export const ADD_ASSERTATIONS = 'ADD_ASSERTATIONS';
+export const ADD_SCORE = 'ADD_SCORE';
+export const ADD_GRAVATAR = 'ADD_GRAVATAR';
+export const CLEAR_SCORE = 'CLEAR_SCORE';
+>>>>>>> 075dd1c49eaf255140fa2cbe7d24172cf9260381
 
 export const addUserName = (user) => ({
   type: ADD_USERNAME,
@@ -39,6 +46,7 @@ export function getToken() {
   };
 }
 
+<<<<<<< HEAD
 // export function getQuestion(token) {
 //   return async (dispatch) => {
 //     //getQuestions(token).then((resp) => {
@@ -46,3 +54,17 @@ export function getToken() {
 //     //});
 //   };
 // }
+=======
+export const addAssertations = () => ({
+  type: ADD_ASSERTATIONS,
+});
+
+export const addScore = (score) => ({
+  type: ADD_SCORE,
+  score,
+});
+
+export const clearScore = () => ({
+  type: CLEAR_SCORE,
+});
+>>>>>>> 075dd1c49eaf255140fa2cbe7d24172cf9260381

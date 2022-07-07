@@ -6,9 +6,16 @@ import { addQuestions, UPDATE_SCORE } from '../redux/actions';
 import { getQuestions } from '../services/GetApi';
 import '../css/Game.css';
 
+/* Feito através da indicação do colega Jessy Damasseno no slack */
+function decodeEntity(inputStr) {
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = inputStr;
+  return textarea.value;
+}
+
 class Game extends React.Component {
   state = {
-    countdown: 30,
+    countdown: 35,
     novoArray1: [],
     correctAnswer: '',
     index: 0,
@@ -81,7 +88,28 @@ class Game extends React.Component {
         button.style = 'border: 3px solid rgb(6, 240, 15)';
       }
     });
+<<<<<<< HEAD
     this.scoreUpdate();
+=======
+    console.log(novoArray1[index].difficulty);
+    console.log(target.id);
+    // if (novoArray1[0])
+    if (target.id === 'correct') {
+      if (novoArray1[index].difficulty === 'hard') {
+        const score = dez + (countdown * tres);
+        dispatch(addScore(score));
+        dispatch(addAssertations());
+      } else if (novoArray1[index].difficulty === 'medium') {
+        const score = dez + (countdown * 2);
+        dispatch(addScore(score));
+        dispatch(addAssertations());
+      } else {
+        const score = dez + (countdown);
+        dispatch(addScore(score));
+        dispatch(addAssertations());
+      }
+    }
+>>>>>>> 075dd1c49eaf255140fa2cbe7d24172cf9260381
   }
 
   scoreUpdate = ({ target: { textContent } }) => {
@@ -120,23 +148,41 @@ class Game extends React.Component {
     const { novoArray1, correctAnswer, index, isAnswered, isDisable } = this.state;
     const cardQuestion = novoArray1.map((question) => (
       <div key={ question.category } className="container">
-        <p
-          key={ question.category }
-          className="container-text"
-          data-testid="question-category"
+        <div className="container-top">
+          <div className="category-container">
+            <p className="label-category">Categoria: </p>
+            <p
+              key={ question.category }
+              className="category"
+              data-testid="question-category"
+            >
+              {question.category}
+            </p>
+          </div>
+          <div className="container-text">
+            <p
+              key={ question.question }
+              data-testid="question-text"
+            >
+              {decodeEntity(question.question)}
+            </p>
+          </div>
+          <div className="category-container countdown">
+            <p className="contdown-text">{countdown}</p>
+          </div>
+
+        </div>
+        <div
+          data-testid="answer-options"
+          className="questions-container"
         >
-          Categoria:
-          {question.category}
-        </p>
-        <p
-          key={ question.question }
-          className="container-text"
-          data-testid="question-text"
-        >
+<<<<<<< HEAD
           Pergunta:
           {question.question}
         </p>
         <div data-testid="answer-options">
+=======
+>>>>>>> 075dd1c49eaf255140fa2cbe7d24172cf9260381
           {question.answers.map((answer, i) => (
             (correctAnswer.includes(answer))
               ? (
@@ -149,7 +195,7 @@ class Game extends React.Component {
                   onClick={ this.handleClickAnswer }
                   disabled={ isDisable }
                 >
-                  {answer}
+                  {decodeEntity(answer)}
                 </button>
               )
               : (
@@ -162,7 +208,7 @@ class Game extends React.Component {
                   onClick={ this.handleClickAnswer }
                   disabled={ isDisable }
                 >
-                  {answer}
+                  {decodeEntity(answer)}
                 </button>
               )
               //  Pesquisa: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -181,6 +227,7 @@ class Game extends React.Component {
                 type="button"
                 data-testid="btn-next"
                 onClick={ this.handleClickNext }
+                className="button-next"
               >
                 Next
               </button>
